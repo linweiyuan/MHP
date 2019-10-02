@@ -3,4 +3,10 @@
     <item name="rbStoneSlots1" type="id" />
     <item name="rbStoneSlots2" type="id" />
     <item name="rbStoneSlots3" type="id" />
+
+    <item name="txtCatIndex" type="id" />
+    <item name="btnCatOperate" type="id" />
+    <item name="edtCatName" type="id" />
+    <item name="edtCatOwner" type="id" />
+    <item name="edtCatIntro" type="id" />
 </resources>

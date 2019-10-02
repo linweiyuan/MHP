@@ -16,6 +16,7 @@ class MiscFragment : Fragment(), ViewPager.OnPageChangeListener,
     QMUITabSegment.OnTabSelectedListener {
     private val stoneFragment = StoneFragment()
     private val drinkFragment = DrinkFragment()
+    private val infoFragment = InfoFragment()
 
     private lateinit var viewPagerMisc: ViewPager
     private lateinit var tabSegmentMisc: QMUITabSegment
@@ -37,6 +38,7 @@ class MiscFragment : Fragment(), ViewPager.OnPageChangeListener,
         val fragmentList = ArrayList<Fragment>()
         fragmentList.add(stoneFragment)
         fragmentList.add(drinkFragment)
+        fragmentList.add(infoFragment)
 
         viewPagerMisc = view.find(R.id.viewPagerMisc)
         viewPagerMisc.offscreenPageLimit = fragmentList.size
@@ -47,6 +49,7 @@ class MiscFragment : Fragment(), ViewPager.OnPageChangeListener,
         tabSegmentMisc = view.find<QMUITabSegment>(R.id.tabSegmentMisc)
             .addTab(QMUITabSegment.Tab(getString(R.string.title_stone)))
             .addTab(QMUITabSegment.Tab(getString(R.string.title_drink)))
+            .addTab(QMUITabSegment.Tab(getString(R.string.title_info)))
 
         tabSegmentMisc.selectTab(0)
         tabSegmentMisc.setHasIndicator(true)

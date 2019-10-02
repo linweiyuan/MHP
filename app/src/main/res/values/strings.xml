@@ -28,4 +28,20 @@
     <string name="stone_skill_rarity">护石稀有度</string>
 
     <string name="title_drink">饮料技能</string>
+
+    <string name="title_info">文字信息</string>
+    <string name="name_not_too_long_hint">名字不要太长，不然可能会有问题，屏幕也显示不全</string>
+    <string name="player_name">玩家名字</string>
+    <string name="player_intro">工会卡片介绍</string>
+    <string name="player_name_empty_hint">玩家名字不能为空</string>
+    <string name="player_info">玩家信息</string>
+
+    <string name="button_add">+增加</string>
+    <string name="cat_index_hint">第1只猫</string>
+    <string name="cat_name">随从猫名字</string>
+    <string name="cat_owner">随从猫主人名字</string>
+    <string name="cat_intro">随从猫介绍</string>
+    <string name="cat_list_more_than_25_hint">随从猫修改数量不能超过25只</string>
+    <string name="cat_name_empty_hint">随从猫名字不能为空</string>
+    <string name="cat_info">随从猫信息</string>
 </resources>
