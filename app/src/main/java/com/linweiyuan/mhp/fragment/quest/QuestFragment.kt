@@ -64,7 +64,7 @@ class QuestFragment : Fragment(), ViewPager.OnPageChangeListener,
     }
 
     private fun init(view: View) {
-        val fragmentList = ArrayList<Fragment>()
+        val fragmentList = mutableListOf<Fragment>()
         fragmentList.add(questBasicFragment)
         fragmentList.add(questShikyuFragment)
         fragmentList.add(questHosyuFragment)
@@ -125,7 +125,7 @@ class QuestFragment : Fragment(), ViewPager.OnPageChangeListener,
                     ArrayAdapter(
                         ctx,
                         android.R.layout.simple_spinner_item,
-                        ArrayList<String>().apply {
+                        mutableListOf<String>().apply {
                             addAll(bossList)
                             addAll(monsterList.filter { it != "无" })
                         })

@@ -36,7 +36,7 @@ class MiscFragment : Fragment(), ViewPager.OnPageChangeListener,
     }
 
     private fun init(view: View) {
-        val fragmentList = ArrayList<Fragment>()
+        val fragmentList = mutableListOf<Fragment>()
         fragmentList.add(stoneFragment)
         fragmentList.add(drinkFragment)
         fragmentList.add(infoFragment)

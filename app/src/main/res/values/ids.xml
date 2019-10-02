@@ -29,4 +29,9 @@
     <item name="spnQuestBossFatigue" type="id" />
     <item name="spnQuestBossStatus" type="id" />
     <item name="spnQuestBossRound" type="id" />
+
+    <item name="recyclerCode" type="id" />
+    <item name="cardCode" type="id" />
+    <item name="txtCodeName" type="id" />
+    <item name="chkCodeEnable" type="id" />
 </resources>

@@ -89,7 +89,7 @@ class InfoFragment : Fragment() {
     }
 
     private fun makeCatList(): MutableList<Cat> {
-        val catList = ArrayList<Cat>()
+        val catList = mutableListOf<Cat>()
         for (i in 0 until llName.childCount) {
             val catView = llName.getChildAt(i)
             val edtCatName = catView.find<EditText>(R.id.edtCatName)

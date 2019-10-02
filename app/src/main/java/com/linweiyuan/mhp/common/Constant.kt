@@ -40,4 +40,9 @@ object Constant {
 
     const val CODE_FILE_NAME = "NPJB40001.ini"
     const val CODE_FILE_FOLDER = "PSP/Cheats"
+    const val CODE_DISABLE = '0'
+    const val CODE_ENABLE = '1'
+    const val CODE_CODE_NAME_PREFIX = "_C"
+    const val CODE_CODE_KEY_PREFIX = "_L"
+    const val CODE_CODE_PREFIX = "0x"
 }

@@ -9,7 +9,9 @@ import com.linweiyuan.mhp.R
 import com.linweiyuan.mhp.adapter.PagerAdapter
 import com.linweiyuan.mhp.common.Constant
 import com.linweiyuan.mhp.common.file
+import com.linweiyuan.mhp.common.readCodeFile
 import com.linweiyuan.mhp.common.toLogin
+import com.linweiyuan.mhp.fragment.CodeFragment
 import com.linweiyuan.mhp.fragment.misc.MiscFragment
 import com.linweiyuan.mhp.fragment.quest.QuestFragment
 import com.linweiyuan.misc.model.Data
@@ -23,6 +25,8 @@ import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
     ViewPager.OnPageChangeListener {
+    private val codeFragment: CodeFragment by lazy { CodeFragment() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -46,9 +50,10 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
         QMUIStatusBarHelper.translucent(this)
         topBarMain.setTitle(getString(R.string.title_misc))
 
-        val fragmentList = ArrayList<Fragment>()
+        val fragmentList = mutableListOf<Fragment>()
         fragmentList.add(MiscFragment())
         fragmentList.add(QuestFragment())
+        fragmentList.add(codeFragment)
 
         val viewPager = find<ViewPager>(R.id.viewPagerMain)
         // 不设置这个切换会重新加载
@@ -71,6 +76,14 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
                     ContextCompat.getDrawable(this, R.drawable.ic_quest_normal),
                     ContextCompat.getDrawable(this, R.drawable.ic_quest_selected),
                     getText(R.string.title_quest),
+                    false
+                )
+            )
+            .addTab(
+                QMUITabSegment.Tab(
+                    ContextCompat.getDrawable(this, R.drawable.ic_code_normal),
+                    ContextCompat.getDrawable(this, R.drawable.ic_code_selected),
+                    getText(R.string.title_code),
                     false
                 )
             )
@@ -104,6 +117,7 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
         when (index) {
             0 -> topBarMain.setTitle(getString(R.string.title_misc))
             1 -> topBarMain.setTitle(getString(R.string.title_quest))
+            2 -> topBarMain.setTitle(getString(R.string.title_code))
         }
         // noAnimation设为true会闪两次
         tabSegmentMain.selectTab(index, true, true)
@@ -115,6 +129,10 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
             file(Constant.CODE_FILE_FOLDER, Constant.CODE_FILE_NAME).appendText(code)
 
             uiThread {
+                codeFragment.codeList.clear()
+                codeFragment.codeList.addAll(readCodeFile())
+                codeFragment.codeAdapter.notifyDataSetChanged()
+
                 toast(data.msg)
             }
         }
