@@ -3,10 +3,7 @@ package com.linweiyuan.mhp.service
 import android.content.Context
 import com.linweiyuan.mhp.annotation.Api
 import com.linweiyuan.mhp.annotation.Param
-import com.linweiyuan.mhp.model.Cat
-import com.linweiyuan.mhp.model.Drink
-import com.linweiyuan.mhp.model.Player
-import com.linweiyuan.mhp.model.Stone
+import com.linweiyuan.mhp.model.*
 
 interface CodeService {
     @Api("/code/stone")
@@ -20,4 +17,16 @@ interface CodeService {
 
     @Api("/code/cat")
     fun genCatCode(@Param cats: MutableList<Cat>, callback: Callback, ctx: Context)
+
+    @Api("/code/time")
+    fun genTimeCode(@Param time: Time, callback: Callback, ctx: Context)
+
+    @Api("/code/weaponNum")
+    fun genWeaponNumCode(@Param weaponNum: WeaponNum, callback: Callback, ctx: Context)
+
+    @Api("/code/questNum")
+    fun genQuestNumCode(@Param questNum: QuestNum, callback: Callback, ctx: Context)
+
+    @Api("/code/bossNum")
+    fun genBossNumCode(@Param bossNum: BossNum, callback: Callback, ctx: Context)
 }

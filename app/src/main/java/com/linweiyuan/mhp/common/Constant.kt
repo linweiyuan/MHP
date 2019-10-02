@@ -16,6 +16,10 @@ object Constant {
     const val TABLE_STONE_SKILL_POINT = "stone_skill_point"
     const val TABLE_STONE_RARITY = "stone_rarity"
     const val TABLE_DRINK_SKILL = "drink_skill"
+    const val TABLE_WEAPON_TYPE = "weapon_type"
+    const val TABLE_WEAPON_PLACE = "weapon_place"
+    const val TABLE_CARD_QUEST_TYPE = "card_quest_type" // 工会卡片任务执行次数（与自制任务区分）
+    const val TABLE_QUEST_BOSS = "quest_boss"
 
     const val CODE_FILE_NAME = "NPJB40001.ini"
     const val CODE_FILE_FOLDER = "PSP/Cheats"

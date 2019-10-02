@@ -44,4 +44,21 @@
     <string name="cat_list_more_than_25_hint">随从猫修改数量不能超过25只</string>
     <string name="cat_name_empty_hint">随从猫名字不能为空</string>
     <string name="cat_info">随从猫信息</string>
+
+    <string name="title_value">数值设置</string>
+    <string name="time">游戏时间</string>
+    <string name="hour">小时</string>
+    <string name="minute">分钟（00 – 59）</string>
+
+    <string name="weapon_num">武器使用频率</string>
+    <string name="weapon_type">武器类型</string>
+    <string name="weapon_place">武器使用地点</string>
+    <string name="num_hint">次数</string>
+
+    <string name="card_quest_execute_num">任务执行次数</string>
+    <string name="quest_type">任务种类</string>
+
+    <string name="boss_record">狩猎捕获记录</string>
+    <string name="boss_record_kill_num">狩猎数</string>
+    <string name="boss_record_catch_num">捕获数</string>
 </resources>
