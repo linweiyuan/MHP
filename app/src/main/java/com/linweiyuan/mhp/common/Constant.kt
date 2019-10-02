@@ -15,6 +15,7 @@ object Constant {
     const val TABLE_STONE_SKILL = "stone_skill"
     const val TABLE_STONE_SKILL_POINT = "stone_skill_point"
     const val TABLE_STONE_RARITY = "stone_rarity"
+    const val TABLE_DRINK_SKILL = "drink_skill"
 
     const val CODE_FILE_NAME = "NPJB40001.ini"
     const val CODE_FILE_FOLDER = "PSP/Cheats"

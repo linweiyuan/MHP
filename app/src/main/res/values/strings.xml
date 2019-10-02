@@ -26,4 +26,6 @@
     <string name="stone_skill_name">护石技能</string>
     <string name="stone_skill_point">技能点数</string>
     <string name="stone_skill_rarity">护石稀有度</string>
+
+    <string name="title_drink">饮料技能</string>
 </resources>
