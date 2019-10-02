@@ -1,0 +1,10 @@
+<resources>
+    <dimen name="value_5">5dp</dimen>
+    <dimen name="value_10">10dp</dimen>
+    <dimen name="value_15">15dp</dimen>
+
+    <dimen name="image_size">120dp</dimen>
+
+    <dimen name="list_divider_height_negative">-1px</dimen>
+    <dimen name="list_divider_height">1px</dimen>
+</resources>

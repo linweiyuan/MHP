@@ -1,0 +1,79 @@
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/qmui_config_color_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edtUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/value_15"
+            android:layout_marginTop="@dimen/value_15"
+            android:layout_marginEnd="@dimen/value_15"
+            android:drawableStart="@drawable/ic_mail"
+            android:drawablePadding="@dimen/value_15"
+            android:hint="@string/username"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/value_15"
+            android:singleLine="true"
+            tools:ignore="Autofill" />
+
+        <EditText
+            android:id="@+id/edtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/value_15"
+            android:layout_marginStart="@dimen/value_15"
+            android:layout_marginEnd="@dimen/value_15"
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="@dimen/value_15"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="@dimen/value_15"
+            android:singleLine="true"
+            tools:ignore="Autofill" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/btnRegister"
+            style="@style/button_wrapper_style"
+            android:text="@string/register" />
+
+        <EditText
+            android:id="@+id/edtRegCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/value_15"
+            android:layout_marginStart="@dimen/value_15"
+            android:layout_marginEnd="@dimen/value_15"
+            android:drawableStart="@drawable/ic_reg_code"
+            android:drawablePadding="@dimen/value_15"
+            android:hint="@string/reg_code"
+            android:inputType="text"
+            android:maxLength="8"
+            android:padding="@dimen/value_15"
+            android:singleLine="true"
+            android:visibility="gone"
+            tools:ignore="Autofill" />
+
+        <TextView
+            style="@style/QDCommonDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/login_hint" />
+    </LinearLayout>
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/topBarLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true" />
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

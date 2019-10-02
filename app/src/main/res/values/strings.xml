@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">怪物猎人金手指</string>
+
+    <string name="username">用户名（邮箱）</string>
+    <string name="password">密码</string>
+    <string name="login_hint">"
+        使用须知：
+        1.先注册后登录
+        2.输入正确的完整的邮箱地址
+        3.确保验证码邮件不是被垃圾策略拦截了
+    </string>
+    <string name="username_empty_hint">用户名不能为空</string>
+    <string name="password_empty_hint">密码不能为空</string>
+    <string name="register">注册</string>
+    <string name="reg_code">验证码</string>
 </resources>
