@@ -12,4 +12,10 @@ object Constant {
     const val PERMISSION_WRITE_STORAGE = 0x00000001
 
     const val DB_NAME = "mhp.db"
+    const val TABLE_STONE_SKILL = "stone_skill"
+    const val TABLE_STONE_SKILL_POINT = "stone_skill_point"
+    const val TABLE_STONE_RARITY = "stone_rarity"
+
+    const val CODE_FILE_NAME = "NPJB40001.ini"
+    const val CODE_FILE_FOLDER = "PSP/Cheats"
 }

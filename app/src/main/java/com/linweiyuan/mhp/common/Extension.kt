@@ -2,8 +2,10 @@ package com.linweiyuan.mhp.common
 
 import android.app.Activity
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import android.os.Environment
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.linweiyuan.mhp.R
@@ -11,6 +13,8 @@ import com.linweiyuan.mhp.activity.LoginActivity
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog
 import com.qmuiteam.qmui.widget.popup.QMUIPopup
+import org.jetbrains.anko.db.RowParser
+import org.jetbrains.anko.db.select
 import org.jetbrains.anko.startActivity
 import java.io.File
 
@@ -48,3 +52,13 @@ fun file(dirName: String = "", fileName: String, sdcard: Boolean = true): File {
     if (!file.exists()) file.createNewFile()
     return file
 }
+
+fun SQLiteDatabase.arrayAdapter(tableName: String, ctx: Context) = ArrayAdapter(
+    ctx,
+    android.R.layout.simple_spinner_item,
+    (this.select(tableName).parseList(object : RowParser<String> {
+        override fun parseRow(columns: Array<Any?>): String {
+            return columns[1] as String
+        }
+    }))
+)

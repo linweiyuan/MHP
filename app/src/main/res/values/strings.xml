@@ -16,4 +16,14 @@
     <string name="login">登录</string>
 
     <string name="need_permission">APP需要授权才能使用</string>
+
+    <string name="ok">确定</string>
+    <string name="back">返回</string>
+
+    <string name="title_misc">各种设置</string>
+
+    <string name="title_stone">极品护石</string>
+    <string name="stone_skill_name">护石技能</string>
+    <string name="stone_skill_point">技能点数</string>
+    <string name="stone_skill_rarity">护石稀有度</string>
 </resources>

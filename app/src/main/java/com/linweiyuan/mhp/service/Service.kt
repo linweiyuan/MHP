@@ -20,6 +20,7 @@ import java.net.ConnectException
 
 object Service {
     val userService by lazy { create(UserService::class.java) }
+    val codeService by lazy { create(CodeService::class.java) }
 
     @Suppress("UNCHECKED_CAST")
     private fun <T> create(clazz: Class<T>) =
