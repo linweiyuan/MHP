@@ -131,4 +131,13 @@
     <string name="code_copy_finish">代码已复制到剪贴板</string>
     <string name="code_delete">删除</string>
     <string name="code_rename">改名</string>
+
+    <string name="title_about">关于</string>
+    <string name="current_version">当前版本</string>
+    <string name="about">
+        MHP金手指\n\n
+        这是一款方便操作PPSSPP金手指的软件\n\n
+        使用前请确保自己已经会使用金手指，设置错误易死机\n\n
+        By：林伟源
+    </string>
 </resources>

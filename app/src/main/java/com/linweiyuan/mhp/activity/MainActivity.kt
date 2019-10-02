@@ -11,6 +11,7 @@ import com.linweiyuan.mhp.common.Constant
 import com.linweiyuan.mhp.common.file
 import com.linweiyuan.mhp.common.readCodeFile
 import com.linweiyuan.mhp.common.toLogin
+import com.linweiyuan.mhp.fragment.AboutFragment
 import com.linweiyuan.mhp.fragment.CodeFragment
 import com.linweiyuan.mhp.fragment.misc.MiscFragment
 import com.linweiyuan.mhp.fragment.quest.QuestFragment
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
         fragmentList.add(MiscFragment())
         fragmentList.add(QuestFragment())
         fragmentList.add(codeFragment)
+        fragmentList.add(AboutFragment())
 
         val viewPager = find<ViewPager>(R.id.viewPagerMain)
         // 不设置这个切换会重新加载
@@ -84,6 +86,14 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
                     ContextCompat.getDrawable(this, R.drawable.ic_code_normal),
                     ContextCompat.getDrawable(this, R.drawable.ic_code_selected),
                     getText(R.string.title_code),
+                    false
+                )
+            )
+            .addTab(
+                QMUITabSegment.Tab(
+                    ContextCompat.getDrawable(this, R.drawable.ic_about_normal),
+                    ContextCompat.getDrawable(this, R.drawable.ic_about_selected),
+                    getText(R.string.title_about),
                     false
                 )
             )
@@ -118,6 +128,7 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
             0 -> topBarMain.setTitle(getString(R.string.title_misc))
             1 -> topBarMain.setTitle(getString(R.string.title_quest))
             2 -> topBarMain.setTitle(getString(R.string.title_code))
+            3 -> topBarMain.setTitle(getString(R.string.title_about))
         }
         // noAnimation设为true会闪两次
         tabSegmentMain.selectTab(index, true, true)
