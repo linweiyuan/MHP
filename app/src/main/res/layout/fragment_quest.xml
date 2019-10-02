@@ -1,0 +1,30 @@
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/qmui_config_color_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <com.qmuiteam.qmui.widget.QMUITabSegment
+            android:id="@+id/tabSegmentQuest"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/tab_panel_bg" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPagerQuest"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fitsSystemWindows="true" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/btnCreateQuestCode"
+            style="@style/button_wrapper_style"
+            android:text="@string/ok" />
+    </LinearLayout>
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

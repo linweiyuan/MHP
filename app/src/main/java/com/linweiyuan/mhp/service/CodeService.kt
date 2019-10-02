@@ -29,4 +29,7 @@ interface CodeService {
 
     @Api("/code/bossNum")
     fun genBossNumCode(@Param bossNum: BossNum, callback: Callback, ctx: Context)
+
+    @Api("/code/quest")
+    fun genQuestCode(@Param quest: Quest, callback: Callback, ctx: Context)
 }

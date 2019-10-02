@@ -11,6 +11,7 @@ import com.linweiyuan.mhp.common.Constant
 import com.linweiyuan.mhp.common.file
 import com.linweiyuan.mhp.common.toLogin
 import com.linweiyuan.mhp.fragment.misc.MiscFragment
+import com.linweiyuan.mhp.fragment.quest.QuestFragment
 import com.linweiyuan.misc.model.Data
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper
 import com.qmuiteam.qmui.widget.QMUITabSegment
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
 
         val fragmentList = ArrayList<Fragment>()
         fragmentList.add(MiscFragment())
+        fragmentList.add(QuestFragment())
 
         val viewPager = find<ViewPager>(R.id.viewPagerMain)
         // 不设置这个切换会重新加载
@@ -61,6 +63,14 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
                     ContextCompat.getDrawable(this, R.drawable.ic_misc_normal),
                     ContextCompat.getDrawable(this, R.drawable.ic_misc_selected),
                     getText(R.string.title_misc),
+                    false
+                )
+            )
+            .addTab(
+                QMUITabSegment.Tab(
+                    ContextCompat.getDrawable(this, R.drawable.ic_quest_normal),
+                    ContextCompat.getDrawable(this, R.drawable.ic_quest_selected),
+                    getText(R.string.title_quest),
                     false
                 )
             )
@@ -93,6 +103,7 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
     override fun onPageSelected(index: Int) {
         when (index) {
             0 -> topBarMain.setTitle(getString(R.string.title_misc))
+            1 -> topBarMain.setTitle(getString(R.string.title_quest))
         }
         // noAnimation设为true会闪两次
         tabSegmentMain.selectTab(index, true, true)

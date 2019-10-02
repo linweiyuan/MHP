@@ -9,4 +9,24 @@
     <item name="edtCatName" type="id" />
     <item name="edtCatOwner" type="id" />
     <item name="edtCatIntro" type="id" />
+
+    <item name="spnQuestShikyu" type="id" />
+    <item name="edtQuestShikyuNum" type="id" />
+    <item name="btnShikyuOperate" type="id" />
+    <item name="spnQuestHosyu" type="id" />
+    <item name="edtQuestHosyuNum" type="id" />
+    <item name="btnHosyuOperate" type="id" />
+    <item name="spnQuestMonster" type="id" />
+    <item name="spnQuestMonsterArea" type="id" />
+    <item name="edtQuestMonsterNum" type="id" />
+    <item name="spnQuestBoss" type="id" />
+    <item name="spnQuestBossArea" type="id" />
+    <item name="edtQuestBossNum" type="id" />
+    <item name="edtQuestBossSize" type="id" />
+    <item name="spnQuestBossHP" type="id" />
+    <item name="spnQuestBossStrength" type="id" />
+    <item name="spnQuestBossEndurance" type="id" />
+    <item name="spnQuestBossFatigue" type="id" />
+    <item name="spnQuestBossStatus" type="id" />
+    <item name="spnQuestBossRound" type="id" />
 </resources>

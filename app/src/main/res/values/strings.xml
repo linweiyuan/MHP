@@ -61,4 +61,63 @@
     <string name="boss_record">狩猎捕获记录</string>
     <string name="boss_record_kill_num">狩猎数</string>
     <string name="boss_record_catch_num">捕获数</string>
+
+    <string name="title_quest">自制任务</string>
+    <string name="quest_basic">基本设置</string>
+    <string name="quest_name">任务名称</string>
+    <string name="quest_content">任务内容</string>
+    <string name="quest_success_condition">成功条件</string>
+    <string name="quest_failure_condition">失败条件</string>
+    <string name="quest_main_monster">主要怪物</string>
+    <string name="quest_client">委托人</string>
+    <string name="quest_success_point">成功点数</string>
+    <string name="quest_failure_point">失败点数</string>
+    <string name="quest_contract_gold">契约金</string>
+    <string name="quest_reward_gold">报酬金</string>
+    <string name="quest_time_minute">任务时间（分）</string>
+    <string name="quest_time_second">任务时间（秒）</string>
+    <string name="quest_start_area">开始位置</string>
+    <string name="quest_boss_skill">BOSS技能</string>
+    <string name="quest_pick_off_rank">剥取素材级别</string>
+    <string name="quest_bgm">BGM</string>
+    <string name="quest_return_time">归还时间</string>
+
+    <string name="quest_rank">任务级别</string>
+    <string name="quest_map">任务地图</string>
+    <string name="quest_join_condition_1">参加条件1</string>
+    <string name="quest_join_condition_2">参加条件2</string>
+    <string name="quest_success_condition_0">任务完成条件</string>
+    <string name="quest_success_condition_1">条件1</string>
+    <string name="quest_success_condition_2">条件2</string>
+    <string name="quest_success_condition_1_item">条件1目标</string>
+    <string name="quest_success_condition_2_item">条件2目标</string>
+    <string name="quest_boss_icon_1">BOSS1图标</string>
+    <string name="quest_boss_icon_2">BOSS2图标</string>
+    <string name="quest_boss_icon_3">BOSS3图标</string>
+    <string name="quest_boss_icon_4">BOSS4图标</string>
+    <string name="quest_boss_icon_5">BOSS5图标</string>
+
+    <string name="quest_shikyu">支给品设置</string>
+    <string name="shikyu">支给品</string>
+    <string name="shikyu_list_more_than_40_hint">支给品40个，不能再多了</string>
+
+    <string name="quest_hosyu">报酬品设置</string>
+    <string name="hosyu">报酬品</string>
+    <string name="hosyu_limit_hint">自制任务报酬品暂时只支持设置一个\n额外的可以设置到支给品中，最多40个\n临时解决方案</string>
+
+    <string name="quest_monster">小怪设置</string>
+    <string name="monster">小怪</string>
+    <string name="occur_area">出现位置</string>
+
+    <string name="quest_boss">BOSS设置</string>
+    <string name="quest_boss_num">数量</string>
+    <string name="quest_boss_size">体型</string>
+    <string name="boss">BOSS</string>
+    <string name="quest_boss_status">状态</string>
+    <string name="quest_boss_round">出场回合</string>
+    <string name="quest_boss_hp">血量</string>
+    <string name="quest_boss_strength">强度</string>
+    <string name="quest_boss_endurance">部位耐性</string>
+    <string name="quest_boss_fatigue">耐力</string>
+    <string name="quest_name_empty_hint">任务名称不能为空</string>
 </resources>
