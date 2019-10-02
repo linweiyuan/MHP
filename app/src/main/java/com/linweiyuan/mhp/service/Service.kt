@@ -53,13 +53,11 @@ object Service {
 
                     uiThread {
                         dialog.dismiss()
+                        ctx.toast(data.msg)
 
                         when (data.code) {
                             Code.OK -> callback.onSuccess(data)
-                            Code.ERR -> {
-                                ctx.toast(data.msg)
-                                callback.onFailure(data)
-                            }
+                            Code.ERR -> callback.onFailure(data)
                         }
                     }
                 } catch (e: Exception) {

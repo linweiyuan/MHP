@@ -5,4 +5,6 @@ object Constant {
 
     const val SP_FILE_NAME = "mhp"
     const val SP_TOKEN = "token"
+
+    const val REG_CODE_LENGTH = 8
 }

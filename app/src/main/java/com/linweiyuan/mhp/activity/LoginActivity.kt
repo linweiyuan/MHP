@@ -1,9 +1,12 @@
 package com.linweiyuan.mhp.activity
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.linweiyuan.mhp.R
+import com.linweiyuan.mhp.common.Constant
 import com.linweiyuan.mhp.common.popup
 import com.linweiyuan.mhp.model.User
 import com.linweiyuan.mhp.service.Callback
@@ -14,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.toast
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), TextWatcher {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -31,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
                 edtPassword.text.toString().trim()
             )
         }
+        edtRegCode.addTextChangedListener(this)
     }
 
     private fun register(username: String, password: String) {
@@ -66,5 +70,31 @@ class LoginActivity : AppCompatActivity() {
             return false
         }
         return true
+    }
+
+    override fun afterTextChanged(text: Editable?) {
+        if (text.toString().length == Constant.REG_CODE_LENGTH) {
+            validate(
+                edtUsername.text.toString().trim(),
+                edtPassword.text.toString().trim(),
+                edtRegCode.text.toString().trim()
+            )
+        }
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+    private fun validate(username: String, password: String, regCode: String) {
+        userService.validate(User(username, password, regCode), object : Callback {
+            override fun onSuccess(data: Data) {
+
+            }
+
+            override fun onFailure(data: Data) {
+
+            }
+        }, this)
     }
 }
