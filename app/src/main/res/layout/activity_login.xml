@@ -42,6 +42,11 @@
             tools:ignore="Autofill" />
 
         <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/btnLogin"
+            style="@style/button_wrapper_style"
+            android:text="@string/login" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
             android:id="@+id/btnRegister"
             style="@style/button_wrapper_style"
             android:text="@string/register" />

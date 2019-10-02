@@ -11,4 +11,7 @@ interface UserService {
 
     @Api("/user/validate")
     fun validate(@Param user: User, callback: Callback, ctx: Context)
+
+    @Api("/user/login")
+    fun login(@Param user: User, callback: Callback, ctx: Context)
 }

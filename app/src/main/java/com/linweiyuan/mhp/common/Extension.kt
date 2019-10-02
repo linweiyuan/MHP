@@ -2,6 +2,7 @@ package com.linweiyuan.mhp.common
 
 import android.app.Activity
 import android.content.Context
+import android.os.Environment
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -11,6 +12,7 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog
 import com.qmuiteam.qmui.widget.popup.QMUIPopup
 import org.jetbrains.anko.startActivity
+import java.io.File
 
 fun Context.popup(msg: String?) = QMUIPopup(this, QMUIPopup.DIRECTION_NONE).apply {
     val textView = TextView(this@popup)
@@ -32,4 +34,17 @@ fun Context.loadingDialog(): QMUITipDialog =
 fun Context.toLogin() {
     startActivity<LoginActivity>()
     (this as Activity).finish()
+}
+
+fun file(dirName: String = "", fileName: String, sdcard: Boolean = true): File {
+    @Suppress("DEPRECATION")
+    val dir = if (sdcard) {
+        File(Environment.getExternalStorageDirectory().absoluteFile, dirName)
+    } else {
+        File(dirName)
+    }
+    if (!dir.exists()) dir.mkdirs()
+    val file = File(dir, fileName)
+    if (!file.exists()) file.createNewFile()
+    return file
 }

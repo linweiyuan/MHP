@@ -13,4 +13,7 @@
     <string name="password_empty_hint">密码不能为空</string>
     <string name="register">注册</string>
     <string name="reg_code">验证码</string>
+    <string name="login">登录</string>
+
+    <string name="need_permission">APP需要授权才能使用</string>
 </resources>

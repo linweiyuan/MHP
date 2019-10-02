@@ -7,4 +7,9 @@ object Constant {
     const val SP_TOKEN = "token"
 
     const val REG_CODE_LENGTH = 8
+
+    const val SP_PERMISSION_GRANTED = "permission_granted"
+    const val PERMISSION_WRITE_STORAGE = 0x00000001
+
+    const val DB_NAME = "mhp.db"
 }

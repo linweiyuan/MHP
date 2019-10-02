@@ -1,12 +1,16 @@
 package com.linweiyuan.mhp.activity
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.linweiyuan.mhp.R
 import com.linweiyuan.mhp.common.Constant
+import com.linweiyuan.mhp.common.file
 import com.linweiyuan.mhp.common.popup
 import com.linweiyuan.mhp.model.User
 import com.linweiyuan.mhp.service.Callback
@@ -14,7 +18,9 @@ import com.linweiyuan.mhp.service.Service.userService
 import com.linweiyuan.misc.model.Data
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper
 import kotlinx.android.synthetic.main.activity_login.*
+import org.jetbrains.anko.longToast
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class LoginActivity : AppCompatActivity(), TextWatcher {
@@ -35,6 +41,12 @@ class LoginActivity : AppCompatActivity(), TextWatcher {
             )
         }
         edtRegCode.addTextChangedListener(this)
+        btnLogin.onClick {
+            login(
+                edtUsername.text.toString().trim(),
+                edtPassword.text.toString().trim()
+            )
+        }
     }
 
     private fun register(username: String, password: String) {
@@ -72,8 +84,8 @@ class LoginActivity : AppCompatActivity(), TextWatcher {
         return true
     }
 
-    override fun afterTextChanged(text: Editable?) {
-        if (text.toString().length == Constant.REG_CODE_LENGTH) {
+    override fun afterTextChanged(s: Editable?) {
+        if (s.toString().length == Constant.REG_CODE_LENGTH) {
             validate(
                 edtUsername.text.toString().trim(),
                 edtPassword.text.toString().trim(),
@@ -82,19 +94,73 @@ class LoginActivity : AppCompatActivity(), TextWatcher {
         }
     }
 
-    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
     private fun validate(username: String, password: String, regCode: String) {
         userService.validate(User(username, password, regCode), object : Callback {
             override fun onSuccess(data: Data) {
-
+                login(username, password)
             }
 
             override fun onFailure(data: Data) {
 
             }
         }, this)
+    }
+
+    private fun login(username: String, password: String) {
+        if (check(username, password)) {
+            btnLogin.isEnabled = false
+
+            userService.login(User(username = username, password = password), object : Callback {
+                override fun onSuccess(data: Data) {
+                    saveSP(Constant.SP_TOKEN, data.data as String)
+
+                    ActivityCompat.requestPermissions(this@LoginActivity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), Constant.PERMISSION_WRITE_STORAGE)
+                }
+
+                override fun onFailure(data: Data) {
+                    btnLogin.isEnabled = true
+                }
+            }, this)
+        }
+    }
+
+    private fun saveSP(key: String, value: String) {
+        getSharedPreferences(Constant.SP_FILE_NAME, MODE_PRIVATE)
+            .edit()
+            .putString(key, value)
+            .apply()
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            Constant.PERMISSION_WRITE_STORAGE -> {
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    longToast(getString(R.string.need_permission))
+                    finish()
+                } else {
+                    saveSP(Constant.SP_PERMISSION_GRANTED, "") // 空标识
+                    initDB()
+                    toMain()
+                }
+            }
+        }
+    }
+
+    private fun initDB() {
+        val fullPath = getDatabasePath(Constant.DB_NAME).canonicalPath
+        val dirName = fullPath.substring(0, fullPath.lastIndexOf('/'))
+        val fileName = fullPath.substring(fullPath.lastIndexOf('/') + 1)
+
+        val bytes = resources.openRawResource(R.raw.mhp).readBytes()
+        file(dirName, fileName, false).writeBytes(bytes)
+    }
+
+    private fun toMain() {
+        startActivity<MainActivity>()
+        finish()
     }
 }
