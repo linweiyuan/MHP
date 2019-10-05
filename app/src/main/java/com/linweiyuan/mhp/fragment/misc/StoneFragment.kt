@@ -37,11 +37,7 @@ class StoneFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var ctx: Context
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         ctx = requireContext()
         val view = StoneFragmentUI().createView(AnkoContext.create(ctx, this))
         init()
@@ -88,13 +84,11 @@ class StoneFragment : androidx.fragment.app.Fragment() {
             slot = (requireActivity().find<RadioButton>(rgStoneSlots.checkedRadioButtonId)).text.toString().toInt()
         )
         codeService.genStoneCode(stone, object : Callback {
-            override fun onSuccess(data:Data) {
+            override fun onSuccess(data: Data) {
                 (activity as MainActivity).onSuccess(data)
             }
 
-            override fun onFailure(data:Data) {
-
-            }
+            override fun onFailure(data: Data) {}
         }, ctx)
     }
 }

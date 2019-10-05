@@ -25,11 +25,7 @@ class QuestBossFragment : Fragment() {
 
     private lateinit var ctx: Context
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         ctx = requireContext()
         val view = QuestBossFragmentUI().createView(AnkoContext.create(ctx, this))
         init()
@@ -55,18 +51,12 @@ class QuestBossFragment : Fragment() {
             uiThread {
                 for (i in 0 until 4) {
                     val bossView = BossItemComponent().createView(AnkoContext.create(ctx, ctx))
-                    bossView.layoutParams =
-                        ViewGroup.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT
-                        )
+                    bossView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                     bossView.find<Spinner>(R.id.spnQuestBoss).adapter = questBossAdapter
                     bossView.find<Spinner>(R.id.spnQuestBossArea).adapter = questAreaAdapter
                     bossView.find<Spinner>(R.id.spnQuestBossHP).adapter = questBossPointAdapter
-                    bossView.find<Spinner>(R.id.spnQuestBossStrength).adapter =
-                        questBossPointAdapter
-                    bossView.find<Spinner>(R.id.spnQuestBossEndurance).adapter =
-                        questBossPointAdapter
+                    bossView.find<Spinner>(R.id.spnQuestBossStrength).adapter = questBossPointAdapter
+                    bossView.find<Spinner>(R.id.spnQuestBossEndurance).adapter = questBossPointAdapter
                     bossView.find<Spinner>(R.id.spnQuestBossFatigue).adapter = questBossPointAdapter
                     bossView.find<Spinner>(R.id.spnQuestBossStatus).adapter = questBossStatusAdapter
                     bossView.find<Spinner>(R.id.spnQuestBossRound).adapter = questBossRoundAdapter

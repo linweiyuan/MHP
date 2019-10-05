@@ -3,7 +3,6 @@ package com.linweiyuan.mhp.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.linweiyuan.mhp.R
 import com.linweiyuan.mhp.adapter.PagerAdapter
@@ -24,8 +23,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
-class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
-    ViewPager.OnPageChangeListener {
+class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener, ViewPager.OnPageChangeListener {
     private val codeFragment: CodeFragment by lazy { CodeFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,10 +33,7 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
 
     private fun init() {
         // 判断是否登录过
-        val token = getSharedPreferences(Constant.SP_FILE_NAME, MODE_PRIVATE).getString(
-            Constant.SP_TOKEN,
-            null
-        )
+        val token = getSharedPreferences(Constant.SP_FILE_NAME, MODE_PRIVATE).getString(Constant.SP_TOKEN, null)
         if (token == null) {
             toLogin()
         } else {
@@ -51,11 +46,7 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
         QMUIStatusBarHelper.translucent(this)
         topBarMain.setTitle(getString(R.string.title_misc))
 
-        val fragmentList = mutableListOf<Fragment>()
-        fragmentList.add(MiscFragment())
-        fragmentList.add(QuestFragment())
-        fragmentList.add(codeFragment)
-        fragmentList.add(AboutFragment())
+        val fragmentList = mutableListOf(MiscFragment(), QuestFragment(), codeFragment, AboutFragment())
 
         val viewPager = find<ViewPager>(R.id.viewPagerMain)
         // 不设置这个切换会重新加载
@@ -65,38 +56,10 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
         viewPager.addOnPageChangeListener(this)
 
         val tabSegment = find<QMUITabSegment>(R.id.tabSegmentMain)
-            .addTab(
-                QMUITabSegment.Tab(
-                    ContextCompat.getDrawable(this, R.drawable.ic_misc_normal),
-                    ContextCompat.getDrawable(this, R.drawable.ic_misc_selected),
-                    getText(R.string.title_misc),
-                    false
-                )
-            )
-            .addTab(
-                QMUITabSegment.Tab(
-                    ContextCompat.getDrawable(this, R.drawable.ic_quest_normal),
-                    ContextCompat.getDrawable(this, R.drawable.ic_quest_selected),
-                    getText(R.string.title_quest),
-                    false
-                )
-            )
-            .addTab(
-                QMUITabSegment.Tab(
-                    ContextCompat.getDrawable(this, R.drawable.ic_code_normal),
-                    ContextCompat.getDrawable(this, R.drawable.ic_code_selected),
-                    getText(R.string.title_code),
-                    false
-                )
-            )
-            .addTab(
-                QMUITabSegment.Tab(
-                    ContextCompat.getDrawable(this, R.drawable.ic_about_normal),
-                    ContextCompat.getDrawable(this, R.drawable.ic_about_selected),
-                    getText(R.string.title_about),
-                    false
-                )
-            )
+            .addTab(QMUITabSegment.Tab(ContextCompat.getDrawable(this, R.drawable.ic_misc_normal), ContextCompat.getDrawable(this, R.drawable.ic_misc_selected), getText(R.string.title_misc), false))
+            .addTab(QMUITabSegment.Tab(ContextCompat.getDrawable(this, R.drawable.ic_quest_normal), ContextCompat.getDrawable(this, R.drawable.ic_quest_selected), getText(R.string.title_quest), false))
+            .addTab(QMUITabSegment.Tab(ContextCompat.getDrawable(this, R.drawable.ic_code_normal), ContextCompat.getDrawable(this, R.drawable.ic_code_selected), getText(R.string.title_code), false))
+            .addTab(QMUITabSegment.Tab(ContextCompat.getDrawable(this, R.drawable.ic_about_normal), ContextCompat.getDrawable(this, R.drawable.ic_about_selected), getText(R.string.title_about), false))
         tabSegment.selectTab(0)
         // 显示indicator
         tabSegment.setHasIndicator(true)
@@ -119,19 +82,19 @@ class MainActivity : AppCompatActivity(), QMUITabSegment.OnTabSelectedListener,
         viewPagerMain.currentItem = index
     }
 
-    override fun onPageScrollStateChanged(index: Int) {}
+    override fun onPageScrollStateChanged(state: Int) {}
 
-    override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {}
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
-    override fun onPageSelected(index: Int) {
-        when (index) {
+    override fun onPageSelected(position: Int) {
+        when (position) {
             0 -> topBarMain.setTitle(getString(R.string.title_misc))
             1 -> topBarMain.setTitle(getString(R.string.title_quest))
             2 -> topBarMain.setTitle(getString(R.string.title_code))
             3 -> topBarMain.setTitle(getString(R.string.title_about))
         }
         // noAnimation设为true会闪两次
-        tabSegmentMain.selectTab(index, true, true)
+        tabSegmentMain.selectTab(position, true, true)
     }
 
     internal fun onSuccess(data: Data) {

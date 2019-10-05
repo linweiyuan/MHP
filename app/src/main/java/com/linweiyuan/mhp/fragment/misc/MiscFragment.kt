@@ -12,23 +12,18 @@ import com.linweiyuan.mhp.adapter.PagerAdapter
 import com.qmuiteam.qmui.widget.QMUITabSegment
 import org.jetbrains.anko.find
 
-class MiscFragment : Fragment(), ViewPager.OnPageChangeListener,
-    QMUITabSegment.OnTabSelectedListener {
-    private val stoneFragment = StoneFragment()
-    private val drinkFragment = DrinkFragment()
-    private val infoFragment = InfoFragment()
-    private val valueFragment = ValueFragment()
+class MiscFragment : Fragment(), ViewPager.OnPageChangeListener, QMUITabSegment.OnTabSelectedListener {
+    private val stoneFragment: StoneFragment by lazy { StoneFragment() }
+    private val drinkFragment: DrinkFragment by lazy { DrinkFragment() }
+    private val infoFragment: InfoFragment by lazy { InfoFragment() }
+    private val valueFragment: ValueFragment by lazy { ValueFragment() }
 
     private lateinit var viewPagerMisc: ViewPager
     private lateinit var tabSegmentMisc: QMUITabSegment
 
     private lateinit var ctx: Context
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         ctx = requireContext()
         val view = View.inflate(ctx, R.layout.fragment_misc, null)
         init(view)
@@ -36,11 +31,7 @@ class MiscFragment : Fragment(), ViewPager.OnPageChangeListener,
     }
 
     private fun init(view: View) {
-        val fragmentList = mutableListOf<Fragment>()
-        fragmentList.add(stoneFragment)
-        fragmentList.add(drinkFragment)
-        fragmentList.add(infoFragment)
-        fragmentList.add(valueFragment)
+        val fragmentList = mutableListOf(stoneFragment, drinkFragment, infoFragment, valueFragment)
 
         viewPagerMisc = view.find(R.id.viewPagerMisc)
         viewPagerMisc.offscreenPageLimit = fragmentList.size
@@ -63,12 +54,12 @@ class MiscFragment : Fragment(), ViewPager.OnPageChangeListener,
         pagerAdapter.notifyDataSetChanged()
     }
 
-    override fun onPageScrollStateChanged(p0: Int) {}
+    override fun onPageScrollStateChanged(state: Int) {}
 
-    override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {}
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
-    override fun onPageSelected(index: Int) {
-        tabSegmentMisc.selectTab(index, true, true)
+    override fun onPageSelected(position: Int) {
+        tabSegmentMisc.selectTab(position, true, true)
     }
 
     override fun onDoubleTap(index: Int) {}

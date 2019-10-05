@@ -25,11 +25,7 @@ class QuestMonsterFragment : Fragment() {
 
     private lateinit var ctx: Context
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         ctx = requireContext()
         val view = QuestMonsterFragmentUI().createView(AnkoContext.create(ctx, this))
         init()
@@ -48,16 +44,10 @@ class QuestMonsterFragment : Fragment() {
 
             uiThread {
                 for (i in 0 until 4) {
-                    val monsterView =
-                        MonsterItemComponent().createView(AnkoContext.create(ctx, ctx))
-                    monsterView.layoutParams =
-                        ViewGroup.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT
-                        )
+                    val monsterView = MonsterItemComponent().createView(AnkoContext.create(ctx, ctx))
+                    monsterView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                     monsterView.find<Spinner>(R.id.spnQuestMonster).adapter = questMonsterAdapter
-                    monsterView.find<Spinner>(R.id.spnQuestMonsterArea).adapter =
-                        questMonsterAreaAdapter
+                    monsterView.find<Spinner>(R.id.spnQuestMonsterArea).adapter = questMonsterAreaAdapter
                     llMonster.addView(monsterView)
                 }
             }

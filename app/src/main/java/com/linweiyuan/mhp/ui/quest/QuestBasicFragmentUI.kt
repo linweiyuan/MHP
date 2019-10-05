@@ -14,48 +14,42 @@ class QuestBasicFragmentUI : AnkoComponent<QuestBasicFragment> {
     override fun createView(ui: AnkoContext<QuestBasicFragment>) = with(ui) {
         scrollView {
             verticalLayout {
-                owner.edtQuestName =
-                    editText {
-                        hint = ctx.getString(R.string.quest_name)
-                    }.lparams(width = matchParent) {
-                        marginStart = dimen(R.dimen.value_15)
-                        marginEnd = dimen(R.dimen.value_15)
-                    }
-                owner.edtQuestContent =
-                    editText {
-                        hint = ctx.getString(R.string.quest_content)
-                    }.lparams(width = matchParent) {
-                        marginStart = dimen(R.dimen.value_15)
-                        marginEnd = dimen(R.dimen.value_15)
-                    }
-                owner.edtQuestSuccess =
-                    editText { hint = ctx.getString(R.string.quest_success_condition) }.lparams(
-                        width = matchParent
-                    ) {
-                        marginStart = dimen(R.dimen.value_15)
-                        marginEnd = dimen(R.dimen.value_15)
-                    }
-                owner.edtQuestFailure =
-                    editText { hint = ctx.getString(R.string.quest_failure_condition) }.lparams(
-                        width = matchParent
-                    ) {
-                        marginStart = dimen(R.dimen.value_15)
-                        marginEnd = dimen(R.dimen.value_15)
-                    }
-                owner.edtQuestMonster =
-                    editText {
-                        hint = ctx.getString(R.string.quest_main_monster)
-                    }.lparams(width = matchParent) {
-                        marginStart = dimen(R.dimen.value_15)
-                        marginEnd = dimen(R.dimen.value_15)
-                    }
-                owner.edtQuestClient =
-                    editText {
-                        hint = ctx.getString(R.string.quest_client)
-                    }.lparams(width = matchParent) {
-                        marginStart = dimen(R.dimen.value_15)
-                        marginEnd = dimen(R.dimen.value_15)
-                    }
+                owner.edtQuestName = editText {
+                    hint = ctx.getString(R.string.quest_name)
+                }.lparams(width = matchParent) {
+                    marginStart = dimen(R.dimen.value_15)
+                    marginEnd = dimen(R.dimen.value_15)
+                }
+                owner.edtQuestContent = editText {
+                    hint = ctx.getString(R.string.quest_content)
+                }.lparams(width = matchParent) {
+                    marginStart = dimen(R.dimen.value_15)
+                    marginEnd = dimen(R.dimen.value_15)
+                }
+                owner.edtQuestSuccess = editText { hint = ctx.getString(R.string.quest_success_condition) }.lparams(
+                    width = matchParent
+                ) {
+                    marginStart = dimen(R.dimen.value_15)
+                    marginEnd = dimen(R.dimen.value_15)
+                }
+                owner.edtQuestFailure = editText { hint = ctx.getString(R.string.quest_failure_condition) }.lparams(
+                    width = matchParent
+                ) {
+                    marginStart = dimen(R.dimen.value_15)
+                    marginEnd = dimen(R.dimen.value_15)
+                }
+                owner.edtQuestMonster = editText {
+                    hint = ctx.getString(R.string.quest_main_monster)
+                }.lparams(width = matchParent) {
+                    marginStart = dimen(R.dimen.value_15)
+                    marginEnd = dimen(R.dimen.value_15)
+                }
+                owner.edtQuestClient = editText {
+                    hint = ctx.getString(R.string.quest_client)
+                }.lparams(width = matchParent) {
+                    marginStart = dimen(R.dimen.value_15)
+                    marginEnd = dimen(R.dimen.value_15)
+                }
 
                 linearLayout {
                     owner.edtQuestSuccessPts = editText {
@@ -118,38 +112,30 @@ class QuestBasicFragmentUI : AnkoComponent<QuestBasicFragment> {
                     }
                 }
 
-                owner.spnQuestStartArea =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
-                owner.spnQuestBossSkill =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
-                owner.spnQuestPickRank =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
-                owner.spnQuestBGM =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
-                owner.spnQuestReturnTime =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
-                owner.spnQuestType =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
-                owner.spnQuestRank =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
-                owner.spnQuestMap =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
+                owner.spnQuestStartArea = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
+                owner.spnQuestBossSkill = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
+                owner.spnQuestPickRank = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
+                owner.spnQuestBGM = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
+                owner.spnQuestReturnTime = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
+                owner.spnQuestType = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
+                owner.spnQuestRank = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
+                owner.spnQuestMap = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
 
                 linearLayout {
                     owner.spnQuestJoinCondition1 = searchableSpinner {}.lparams(width = 0) {
@@ -162,51 +148,41 @@ class QuestBasicFragmentUI : AnkoComponent<QuestBasicFragment> {
                     }
                 }
 
-                owner.spnQuestSuccessCondition =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
+                owner.spnQuestSuccessCondition = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
                 linearLayout {
                     owner.spnQuestSuccessConditionType1 = searchableSpinner {}.lparams(width = 0) {
                         margin = dimen(R.dimen.value_5)
                         weight = 1F
                     }
-                    owner.spnQuestSuccessConditionTypeItem1 =
-                        searchableSpinner {}.lparams { margin = dimen(R.dimen.value_5) }
-                    owner.edtQuestSuccessConditionTypeNum1 =
-                        editText { setText("0") }.lparams { marginEnd = dimen(R.dimen.value_15) }
+                    owner.spnQuestSuccessConditionTypeItem1 = searchableSpinner {}.lparams { margin = dimen(R.dimen.value_5) }
+                    owner.edtQuestSuccessConditionTypeNum1 = editText { setText("0") }.lparams { marginEnd = dimen(R.dimen.value_15) }
                 }
                 linearLayout {
                     owner.spnQuestSuccessConditionType2 = searchableSpinner {}.lparams(width = 0) {
                         margin = dimen(R.dimen.value_5)
                         weight = 1F
                     }
-                    owner.spnQuestSuccessConditionTypeItem2 =
-                        searchableSpinner {}.lparams { margin = dimen(R.dimen.value_5) }
-                    owner.edtQuestSuccessConditionTypeNum2 =
-                        editText { setText("0") }.lparams { marginEnd = dimen(R.dimen.value_15) }
+                    owner.spnQuestSuccessConditionTypeItem2 = searchableSpinner {}.lparams { margin = dimen(R.dimen.value_5) }
+                    owner.edtQuestSuccessConditionTypeNum2 = editText { setText("0") }.lparams { marginEnd = dimen(R.dimen.value_15) }
                 }
 
-                owner.spnQuestBossIcon1 =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
-                owner.spnQuestBossIcon2 =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
-                owner.spnQuestBossIcon3 =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
-                owner.spnQuestBossIcon4 =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
-                owner.spnQuestBossIcon5 =
-                    searchableSpinner {}.lparams(width = matchParent) {
-                        margin = dimen(R.dimen.value_5)
-                    }
+                owner.spnQuestBossIcon1 = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
+                owner.spnQuestBossIcon2 = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
+                owner.spnQuestBossIcon3 = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
+                owner.spnQuestBossIcon4 = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
+                owner.spnQuestBossIcon5 = searchableSpinner {}.lparams(width = matchParent) {
+                    margin = dimen(R.dimen.value_5)
+                }
             }
         }.applyRecursively {
             if (it is EditText) {

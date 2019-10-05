@@ -34,11 +34,7 @@ class InfoFragment : Fragment() {
 
     private lateinit var ctx: Context
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         ctx = requireContext()
         val view = InfoFragmentUI().createView(AnkoContext.create(ctx, this))
         addCatView(null)
@@ -56,11 +52,7 @@ class InfoFragment : Fragment() {
                 addCatView(view)
             }
         }
-        catView.layoutParams =
-            ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
+        catView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         llName.addView(catView)
         reconfigureView()
     }
@@ -120,9 +112,7 @@ class InfoFragment : Fragment() {
                 (activity as MainActivity).onSuccess(data)
             }
 
-            override fun onFailure(data: Data) {
-
-            }
+            override fun onFailure(data: Data) {}
         }, ctx)
     }
 
@@ -139,9 +129,7 @@ class InfoFragment : Fragment() {
                 (activity as MainActivity).onSuccess(data)
             }
 
-            override fun onFailure(data: Data) {
-
-            }
+            override fun onFailure(data: Data) {}
         }, ctx)
     }
 }

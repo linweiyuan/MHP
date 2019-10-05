@@ -19,8 +19,7 @@ class AboutFragmentUI : AnkoComponent<AboutFragment> {
             }
 
             themedTextView(R.style.QDCommonDescription) {
-                text =
-                    "${resources.getString(R.string.current_version)} ${BuildConfig.VERSION_NAME}"
+                text = "${resources.getString(R.string.current_version)} ${BuildConfig.VERSION_NAME}"
             }.lparams(matchParent) {
                 margin = dimen(R.dimen.value_5)
                 padding = dimen(R.dimen.value_5)

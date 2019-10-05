@@ -25,11 +25,7 @@ class QuestHosyuFragment : Fragment() {
 
     private lateinit var ctx: Context
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         ctx = requireContext()
         val view = QuestHosyuFragmentUI().createView(AnkoContext.create(ctx, this))
         init()
@@ -41,11 +37,7 @@ class QuestHosyuFragment : Fragment() {
             questItemAdapter = arrayAdapter(Constant.TABLE_QUEST_ITEM, ctx)
         }
         val hosyuView = HosyuItemComponent().createView(AnkoContext.create(ctx, ctx))
-        hosyuView.layoutParams =
-            ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
+        hosyuView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         hosyuView.find<Spinner>(R.id.spnQuestHosyu).adapter = questItemAdapter
         llHosyu.addView(hosyuView)
     }

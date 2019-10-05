@@ -21,22 +21,20 @@ import org.jetbrains.anko.db.select
 import org.jetbrains.anko.startActivity
 import java.io.File
 
-fun Context.popup(msg: String?) = QMUIPopup(this, QMUIPopup.DIRECTION_NONE).apply {
-    val textView = TextView(this@popup)
-    textView.layoutParams =
-        generateLayoutParam(QMUIDisplayHelper.dp2px(this@popup, 250), WRAP_CONTENT)
-    textView.setLineSpacing(QMUIDisplayHelper.dp2px(this@popup, 4).toFloat(), 1.0F)
-    val padding = QMUIDisplayHelper.dp2px(this@popup, 20)
+fun Context.popup(msg: String?) = QMUIPopup(this, QMUIPopup.DIRECTION_NONE).also {
+    val textView = TextView(this)
+    textView.layoutParams = it.generateLayoutParam(QMUIDisplayHelper.dp2px(this, 250), WRAP_CONTENT)
+    textView.setLineSpacing(QMUIDisplayHelper.dp2px(this, 4).toFloat(), 1.0F)
+    val padding = QMUIDisplayHelper.dp2px(this, 20)
     textView.setPadding(padding, padding, padding, padding)
-    textView.setTextColor(ContextCompat.getColor(this@popup, R.color.app_color_description))
+    textView.setTextColor(ContextCompat.getColor(this, R.color.app_color_description))
     textView.text = msg
-    setContentView(textView)
-    setAnimStyle(QMUIPopup.ANIM_GROW_FROM_CENTER)
-    setPreferredDirection(QMUIPopup.DIRECTION_TOP)
+    it.setContentView(textView)
+    it.setAnimStyle(QMUIPopup.ANIM_GROW_FROM_CENTER)
+    it.setPreferredDirection(QMUIPopup.DIRECTION_TOP)
 }
 
-fun Context.loadingDialog(): QMUITipDialog =
-    QMUITipDialog.Builder(this).setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING).create()
+fun Context.loadingDialog(): QMUITipDialog = QMUITipDialog.Builder(this).setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING).create()
 
 fun Context.toLogin() {
     startActivity<LoginActivity>()
@@ -45,11 +43,7 @@ fun Context.toLogin() {
 
 fun file(dirName: String = "", fileName: String, sdcard: Boolean = true): File {
     @Suppress("DEPRECATION")
-    val dir = if (sdcard) {
-        File(Environment.getExternalStorageDirectory().absoluteFile, dirName)
-    } else {
-        File(dirName)
-    }
+    val dir = File(Environment.getExternalStorageDirectory().absoluteFile, dirName).takeIf { sdcard } ?: File(dirName)
     if (!dir.exists()) dir.mkdirs()
     val file = File(dir, fileName)
     if (!file.exists()) file.createNewFile()
@@ -57,9 +51,7 @@ fun file(dirName: String = "", fileName: String, sdcard: Boolean = true): File {
 }
 
 fun SQLiteDatabase.arrayAdapter(tableName: String, ctx: Context) = ArrayAdapter(
-    ctx,
-    android.R.layout.simple_spinner_item,
-    (this.select(tableName).parseList(object : RowParser<String> {
+    ctx, android.R.layout.simple_spinner_item, (this.select(tableName).parseList(object : RowParser<String> {
         override fun parseRow(columns: Array<Any?>): String {
             return columns[1] as String
         }
@@ -71,9 +63,7 @@ fun writeCodeFile(codeList: MutableList<Code>) {
     codeList.forEach {
         sb.apply {
             append("${Constant.CODE_CODE_NAME_PREFIX}${it.enable} ${it.name}\n")
-            for ((key, value) in it.codeMap) {
-                append("${Constant.CODE_CODE_KEY_PREFIX} ${Constant.CODE_CODE_PREFIX}$key ${Constant.CODE_CODE_PREFIX}$value\n")
-            }
+            it.codeMap.mapValues { (k, v) -> append("${Constant.CODE_CODE_KEY_PREFIX} ${Constant.CODE_CODE_PREFIX}$k ${Constant.CODE_CODE_PREFIX}$v\n") }
         }
     }
     file(Constant.CODE_FILE_FOLDER, Constant.CODE_FILE_NAME).writeText(sb.toString())

@@ -52,11 +52,7 @@ class ValueFragment : Fragment() {
 
     private lateinit var ctx: Context
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         ctx = requireContext()
         val view = ValueFragmentUI().createView(AnkoContext.create(ctx, this))
         init()
@@ -119,9 +115,7 @@ class ValueFragment : Fragment() {
                 (activity as MainActivity).onSuccess(data)
             }
 
-            override fun onFailure(data: Data) {
-
-            }
+            override fun onFailure(data: Data) {}
         }, ctx)
     }
 
@@ -139,9 +133,7 @@ class ValueFragment : Fragment() {
                 (activity as MainActivity).onSuccess(data)
             }
 
-            override fun onFailure(data: Data) {
-
-            }
+            override fun onFailure(data: Data) {}
         }, ctx)
     }
 
@@ -158,9 +150,7 @@ class ValueFragment : Fragment() {
                 (activity as MainActivity).onSuccess(data)
             }
 
-            override fun onFailure(data: Data) {
-
-            }
+            override fun onFailure(data: Data) {}
         }, ctx)
     }
 
@@ -174,15 +164,13 @@ class ValueFragment : Fragment() {
         lateinit var gameId: String
         doAsync {
             ctx.database.use {
-                gameId = select(Constant.TABLE_QUEST_BOSS, "game_id").whereArgs(
-                    "(id = {id} + 2)",
-                    "id" to spnBossRecordBoss.selectedItemPosition
-                ).parseSingle(object :
-                    RowParser<String> {
-                    override fun parseRow(columns: Array<Any?>): String {
-                        return columns[0] as String
-                    }
-                })
+                gameId = select(Constant.TABLE_QUEST_BOSS, "game_id")
+                    .whereArgs("(id = {id} + 2)", "id" to spnBossRecordBoss.selectedItemPosition)
+                    .parseSingle(object : RowParser<String> {
+                        override fun parseRow(columns: Array<Any?>): String {
+                            return columns[0] as String
+                        }
+                    })
             }
             val bossNum = BossNum(
                 gameId = gameId,
@@ -195,9 +183,7 @@ class ValueFragment : Fragment() {
                         (activity as MainActivity).onSuccess(data)
                     }
 
-                    override fun onFailure(data: Data) {
-
-                    }
+                    override fun onFailure(data: Data) {}
                 }, ctx)
             }
         }

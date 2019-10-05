@@ -15,11 +15,7 @@ class AboutFragment : Fragment() {
 
     private lateinit var ctx: Context
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         ctx = requireContext()
         return AboutFragmentUI().createView(AnkoContext.create(ctx, this))
     }

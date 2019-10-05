@@ -32,13 +32,12 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
-class QuestFragment : Fragment(), ViewPager.OnPageChangeListener,
-    QMUITabSegment.OnTabSelectedListener {
-    private val questBasicFragment = QuestBasicFragment()
-    private val questShikyuFragment = QuestShikyuFragment()
-    private val questHosyuFragment = QuestHosyuFragment()
-    private val questMonsterFragment = QuestMonsterFragment()
-    private val questBossFragment = QuestBossFragment()
+class QuestFragment : Fragment(), ViewPager.OnPageChangeListener, QMUITabSegment.OnTabSelectedListener {
+    private val questBasicFragment: QuestBasicFragment by lazy { QuestBasicFragment() }
+    private val questShikyuFragment: QuestShikyuFragment by lazy { QuestShikyuFragment() }
+    private val questHosyuFragment: QuestHosyuFragment by lazy { QuestHosyuFragment() }
+    private val questMonsterFragment: QuestMonsterFragment by lazy { QuestMonsterFragment() }
+    private val questBossFragment: QuestBossFragment by lazy { QuestBossFragment() }
 
     private lateinit var viewPagerQuest: ViewPager
     private lateinit var tabSegmentQuest: QMUITabSegment
@@ -52,11 +51,7 @@ class QuestFragment : Fragment(), ViewPager.OnPageChangeListener,
     private lateinit var monsters: List<Monster>
     private lateinit var bosses: List<Boss>
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         ctx = requireContext()
         val view = View.inflate(ctx, R.layout.fragment_quest, null)
         init(view)
@@ -64,12 +59,7 @@ class QuestFragment : Fragment(), ViewPager.OnPageChangeListener,
     }
 
     private fun init(view: View) {
-        val fragmentList = mutableListOf<Fragment>()
-        fragmentList.add(questBasicFragment)
-        fragmentList.add(questShikyuFragment)
-        fragmentList.add(questHosyuFragment)
-        fragmentList.add(questMonsterFragment)
-        fragmentList.add(questBossFragment)
+        val fragmentList = mutableListOf(questBasicFragment, questShikyuFragment, questHosyuFragment, questMonsterFragment, questBossFragment)
 
         viewPagerQuest = view.find(R.id.viewPagerQuest)
         viewPagerQuest.offscreenPageLimit = fragmentList.size
@@ -106,14 +96,14 @@ class QuestFragment : Fragment(), ViewPager.OnPageChangeListener,
             lateinit var questMonBossMiscAdapter: ArrayAdapter<String>
 
             ctx.database.use {
-                val bossList =
-                    select(Constant.TABLE_QUEST_BOSS).parseList(object : RowParser<String> {
+                val bossList = select(Constant.TABLE_QUEST_BOSS)
+                    .parseList(object : RowParser<String> {
                         override fun parseRow(columns: Array<Any?>): String {
                             return columns[1] as String
                         }
                     })
-                val monsterList =
-                    select(Constant.TABLE_QUEST_MONSTER).parseList(object : RowParser<String> {
+                val monsterList = select(Constant.TABLE_QUEST_MONSTER)
+                    .parseList(object : RowParser<String> {
                         override fun parseRow(columns: Array<Any?>): String {
                             return columns[1] as String
                         }
@@ -121,14 +111,10 @@ class QuestFragment : Fragment(), ViewPager.OnPageChangeListener,
 
                 questBossAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_item, bossList)
                 questItemAdapter = arrayAdapter(Constant.TABLE_QUEST_ITEM, ctx)
-                questMonBossMiscAdapter =
-                    ArrayAdapter(
-                        ctx,
-                        android.R.layout.simple_spinner_item,
-                        mutableListOf<String>().apply {
-                            addAll(bossList)
-                            addAll(monsterList.filter { it != "无" })
-                        })
+                questMonBossMiscAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_item, mutableListOf<String>().apply {
+                    addAll(bossList)
+                    addAll(monsterList.filter { it != "无" })
+                })
             }
 
             uiThread {
@@ -137,51 +123,21 @@ class QuestFragment : Fragment(), ViewPager.OnPageChangeListener,
         }
     }
 
-    private fun initBasicAdapter(
-        questMonBossMiscAdapter: ArrayAdapter<String>,
-        questItemAdapter: ArrayAdapter<String>,
-        questBossAdapter: ArrayAdapter<String>
-    ) {
-        questBasicFragment.spnQuestSuccessConditionType1.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
+    private fun initBasicAdapter(questMonBossMiscAdapter: ArrayAdapter<String>, questItemAdapter: ArrayAdapter<String>, questBossAdapter: ArrayAdapter<String>) {
+        questBasicFragment.spnQuestSuccessConditionType1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    when (position) {
-                        0 -> questBasicFragment.spnQuestSuccessConditionTypeItem1.adapter =
-                            questMonBossMiscAdapter
-                        1 -> questBasicFragment.spnQuestSuccessConditionTypeItem1.adapter =
-                            questItemAdapter
-                    }
-                }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                questBasicFragment.spnQuestSuccessConditionTypeItem1.adapter = if (position == 0) questMonBossMiscAdapter else questItemAdapter
             }
-        questBasicFragment.spnQuestSuccessConditionType2.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+        questBasicFragment.spnQuestSuccessConditionType2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    when (position) {
-                        0 -> questBasicFragment.spnQuestSuccessConditionTypeItem2.adapter =
-                            questMonBossMiscAdapter
-                        1 -> questBasicFragment.spnQuestSuccessConditionTypeItem2.adapter =
-                            questItemAdapter
-                    }
-                }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                questBasicFragment.spnQuestSuccessConditionTypeItem2.adapter = if (position == 0) questMonBossMiscAdapter else questItemAdapter
             }
+        }
         questBasicFragment.spnQuestSuccessConditionTypeItem1.adapter = questMonBossMiscAdapter
         questBasicFragment.spnQuestSuccessConditionTypeItem2.adapter = questMonBossMiscAdapter
         questBasicFragment.spnQuestBossIcon1.adapter = questBossAdapter
@@ -191,12 +147,12 @@ class QuestFragment : Fragment(), ViewPager.OnPageChangeListener,
         questBasicFragment.spnQuestBossIcon5.adapter = questBossAdapter
     }
 
-    override fun onPageScrollStateChanged(p0: Int) {}
+    override fun onPageScrollStateChanged(state: Int) {}
 
-    override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {}
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
-    override fun onPageSelected(index: Int) {
-        tabSegmentQuest.selectTab(index, true, true)
+    override fun onPageSelected(position: Int) {
+        tabSegmentQuest.selectTab(position, true, true)
     }
 
     override fun onDoubleTap(index: Int) {}
@@ -239,9 +195,7 @@ class QuestFragment : Fragment(), ViewPager.OnPageChangeListener,
                             (activity as MainActivity).onSuccess(data)
                         }
 
-                        override fun onFailure(data: Data) {
-
-                        }
+                        override fun onFailure(data: Data) {}
                     }, ctx)
                 }
             }
@@ -280,177 +234,151 @@ class QuestFragment : Fragment(), ViewPager.OnPageChangeListener,
             spnQuestJoinCondition2.selectedItemPosition,
             spnQuestSuccessCondition.selectedItemPosition,
             type1,
-            db.select(
-                if (type1 == 0) (if (item1 <= 40) Constant.TABLE_QUEST_BOSS else Constant.TABLE_QUEST_MONSTER) else Constant.TABLE_QUEST_ITEM,
-                "game_id"
-            ).whereArgs(
-                "(id = {id} + 1)",
-                "id" to if (type1 == 1 || item1 <= 40) item1 else (item1 - 40)
-            ).parseSingle(
-                object : RowParser<String> {
-                    override fun parseRow(columns: Array<Any?>): String {
-                        return columns[0] as String
-                    }
-                }),
+            db.select(if (type1 == 0) (if (item1 <= 40) Constant.TABLE_QUEST_BOSS else Constant.TABLE_QUEST_MONSTER) else Constant.TABLE_QUEST_ITEM, "game_id")
+                .whereArgs("(id = {id} + 1)", "id" to if (type1 == 1 || item1 <= 40) item1 else (item1 - 40))
+                .parseSingle(
+                    object : RowParser<String> {
+                        override fun parseRow(columns: Array<Any?>): String {
+                            return columns[0] as String
+                        }
+                    }),
             edtQuestSuccessConditionTypeNum1.text.toString().trim().toInt(),
             type2,
-            db.select(
-                if (type2 == 0) (if (item2 <= 40) Constant.TABLE_QUEST_BOSS else Constant.TABLE_QUEST_MONSTER) else Constant.TABLE_QUEST_ITEM,
-                "game_id"
-            ).whereArgs(
-                "(id = {id} + 1)",
-                "id" to if (type2 == 1 || item2 <= 40) item2 else (item2 - 40)
-            ).parseSingle(
-                object : RowParser<String> {
+            db.select(if (type2 == 0) (if (item2 <= 40) Constant.TABLE_QUEST_BOSS else Constant.TABLE_QUEST_MONSTER) else Constant.TABLE_QUEST_ITEM, "game_id")
+                .whereArgs("(id = {id} + 1)", "id" to if (type2 == 1 || item2 <= 40) item2 else (item2 - 40))
+                .parseSingle(
+                    object : RowParser<String> {
+                        override fun parseRow(columns: Array<Any?>): String {
+                            return columns[0] as String
+                        }
+                    }),
+            edtQuestSuccessConditionTypeNum2.text.toString().trim().toInt(),
+            db.select(Constant.TABLE_QUEST_BOSS, "game_id")
+                .whereArgs("(id = {id} + 1)", "id" to spnQuestBossIcon1.selectedItemPosition)
+                .parseSingle(object : RowParser<String> {
                     override fun parseRow(columns: Array<Any?>): String {
                         return columns[0] as String
                     }
                 }),
-            edtQuestSuccessConditionTypeNum2.text.toString().trim().toInt(),
-            db.select(Constant.TABLE_QUEST_BOSS, "game_id").whereArgs(
-                "(id = {id} + 1)",
-                "id" to spnQuestBossIcon1.selectedItemPosition
-            ).parseSingle(object : RowParser<String> {
-                override fun parseRow(columns: Array<Any?>): String {
-                    return columns[0] as String
-                }
-            }),
-            db.select(Constant.TABLE_QUEST_BOSS, "game_id").whereArgs(
-                "(id = {id} + 1)",
-                "id" to spnQuestBossIcon2.selectedItemPosition
-            ).parseSingle(object : RowParser<String> {
-                override fun parseRow(columns: Array<Any?>): String {
-                    return columns[0] as String
-                }
-            }),
-            db.select(Constant.TABLE_QUEST_BOSS, "game_id").whereArgs(
-                "(id = {id} + 1)",
-                "id" to spnQuestBossIcon3.selectedItemPosition
-            ).parseSingle(object : RowParser<String> {
-                override fun parseRow(columns: Array<Any?>): String {
-                    return columns[0] as String
-                }
-            }),
-            db.select(Constant.TABLE_QUEST_BOSS, "game_id").whereArgs(
-                "(id = {id} + 1)",
-                "id" to spnQuestBossIcon4.selectedItemPosition
-            ).parseSingle(object : RowParser<String> {
-                override fun parseRow(columns: Array<Any?>): String {
-                    return columns[0] as String
-                }
-            }),
-            db.select(Constant.TABLE_QUEST_BOSS, "game_id").whereArgs(
-                "(id = {id} + 1)",
-                "id" to spnQuestBossIcon5.selectedItemPosition
-            ).parseSingle(object : RowParser<String> {
-                override fun parseRow(columns: Array<Any?>): String {
-                    return columns[0] as String
-                }
-            })
+            db.select(Constant.TABLE_QUEST_BOSS, "game_id")
+                .whereArgs("(id = {id} + 1)", "id" to spnQuestBossIcon2.selectedItemPosition)
+                .parseSingle(object : RowParser<String> {
+                    override fun parseRow(columns: Array<Any?>): String {
+                        return columns[0] as String
+                    }
+                }),
+            db.select(Constant.TABLE_QUEST_BOSS, "game_id")
+                .whereArgs("(id = {id} + 1)", "id" to spnQuestBossIcon3.selectedItemPosition)
+                .parseSingle(object : RowParser<String> {
+                    override fun parseRow(columns: Array<Any?>): String {
+                        return columns[0] as String
+                    }
+                }),
+            db.select(Constant.TABLE_QUEST_BOSS, "game_id")
+                .whereArgs("(id = {id} + 1)", "id" to spnQuestBossIcon4.selectedItemPosition)
+                .parseSingle(object : RowParser<String> {
+                    override fun parseRow(columns: Array<Any?>): String {
+                        return columns[0] as String
+                    }
+                }),
+            db.select(Constant.TABLE_QUEST_BOSS, "game_id")
+                .whereArgs("(id = {id} + 1)", "id" to spnQuestBossIcon5.selectedItemPosition)
+                .parseSingle(object : RowParser<String> {
+                    override fun parseRow(columns: Array<Any?>): String {
+                        return columns[0] as String
+                    }
+                })
         )
     }
 
-    private fun makeShikyuList(db: SQLiteDatabase): MutableList<Shikyu> =
-        mutableListOf<Shikyu>().apply {
-            with(questShikyuFragment) {
-                for (i in 0 until llShikyu.childCount) {
-                    val shikyuView = llShikyu.getChildAt(i)
-                    val spnQuestshikyu = shikyuView.find<Spinner>(R.id.spnQuestShikyu)
-                    val shikyuIndex = spnQuestshikyu.selectedItemPosition
-                    if (shikyuIndex != 0) {
-                        val shikyuNumStr =
-                            shikyuView.find<EditText>(R.id.edtQuestShikyuNum).text.toString().trim()
-                        if (shikyuNumStr.isNotEmpty()) {
-                            val shikyuNum = shikyuNumStr.toInt()
-                            if (shikyuNum != 0) {
-                                add(
-                                    Shikyu(
-                                        db.select(Constant.TABLE_QUEST_ITEM, "game_id").whereArgs(
-                                            "(id = {id} + 1)",
-                                            "id" to shikyuIndex
-                                        ).parseSingle(object : RowParser<String> {
-                                            override fun parseRow(columns: Array<Any?>): String {
-                                                return columns[0] as String
-                                            }
-                                        }), shikyuNum
-                                    )
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-    private fun makeHosyuList(db: SQLiteDatabase): MutableList<Hosyu> =
-        mutableListOf<Hosyu>().apply {
-            with(questHosyuFragment) {
-                for (i in 0 until llHosyu.childCount) {
-                    val hosyuView = llHosyu.getChildAt(i)
-                    val hosyuIndex =
-                        hosyuView.find<Spinner>(R.id.spnQuestHosyu).selectedItemPosition
-                    if (hosyuIndex != 0) {
-                        val hosyuNumStr =
-                            hosyuView.find<EditText>(R.id.edtQuestHosyuNum).text.toString().trim()
-                        if (hosyuNumStr.isNotEmpty()) {
-                            val hosyuNum = hosyuNumStr.toInt()
-                            if (hosyuNum != 0) {
-                                add(
-                                    Hosyu(
-                                        db.select(Constant.TABLE_QUEST_ITEM, "game_id").whereArgs(
-                                            "(id = {id} + 1)",
-                                            "id" to hosyuIndex
-                                        ).parseSingle(object : RowParser<String> {
-                                            override fun parseRow(columns: Array<Any?>): String {
-                                                return columns[0] as String
-                                            }
-                                        }), hosyuNum
-                                    )
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-    private fun makeMonsterList(db: SQLiteDatabase): MutableList<Monster> =
-        mutableListOf<Monster>().apply {
-            with(questMonsterFragment) {
-                for (i in 0 until llMonster.childCount) {
-                    val monsterView = llMonster.getChildAt(i)
-                    val monsterIndex =
-                        monsterView.find<Spinner>(R.id.spnQuestMonster).selectedItemPosition
-                    if (monsterIndex != 0) {
-                        val monsterNumStr =
-                            monsterView.find<EditText>(R.id.edtQuestMonsterNum).text.toString()
-                                .trim()
-                        if (monsterNumStr.isNotEmpty()) {
-                            val monsterNum = monsterNumStr.toInt()
-                            if (monsterNum != 0) {
-                                add(
-                                    Monster(
-                                        db.select(
-                                            Constant.TABLE_QUEST_MONSTER,
-                                            "game_id"
-                                        ).whereArgs(
-                                            "(id = {id} + 1)",
-                                            "id" to monsterIndex
-                                        ).parseSingle(object : RowParser<String> {
+    private fun makeShikyuList(db: SQLiteDatabase): MutableList<Shikyu> = mutableListOf<Shikyu>().apply {
+        with(questShikyuFragment) {
+            for (i in 0 until llShikyu.childCount) {
+                val shikyuView = llShikyu.getChildAt(i)
+                val spnQuestshikyu = shikyuView.find<Spinner>(R.id.spnQuestShikyu)
+                val shikyuIndex = spnQuestshikyu.selectedItemPosition
+                if (shikyuIndex != 0) {
+                    val shikyuNumStr = shikyuView.find<EditText>(R.id.edtQuestShikyuNum).text.toString().trim()
+                    if (shikyuNumStr.isNotEmpty()) {
+                        val shikyuNum = shikyuNumStr.toInt()
+                        if (shikyuNum != 0) {
+                            add(
+                                Shikyu(
+                                    db.select(Constant.TABLE_QUEST_ITEM, "game_id")
+                                        .whereArgs("(id = {id} + 1)", "id" to shikyuIndex)
+                                        .parseSingle(object : RowParser<String> {
                                             override fun parseRow(columns: Array<Any?>): String {
                                                 return columns[0] as String
                                             }
                                         }),
-                                        monsterView.find<Spinner>(R.id.spnQuestMonsterArea).selectedItemPosition,
-                                        monsterNum
-                                    )
+                                    shikyuNum
                                 )
-                            }
+                            )
                         }
                     }
                 }
             }
         }
+    }
+
+    private fun makeHosyuList(db: SQLiteDatabase): MutableList<Hosyu> = mutableListOf<Hosyu>().apply {
+        with(questHosyuFragment) {
+            for (i in 0 until llHosyu.childCount) {
+                val hosyuView = llHosyu.getChildAt(i)
+                val hosyuIndex = hosyuView.find<Spinner>(R.id.spnQuestHosyu).selectedItemPosition
+                if (hosyuIndex != 0) {
+                    val hosyuNumStr = hosyuView.find<EditText>(R.id.edtQuestHosyuNum).text.toString().trim()
+                    if (hosyuNumStr.isNotEmpty()) {
+                        val hosyuNum = hosyuNumStr.toInt()
+                        if (hosyuNum != 0) {
+                            add(
+                                Hosyu(
+                                    db.select(Constant.TABLE_QUEST_ITEM, "game_id")
+                                        .whereArgs("(id = {id} + 1)", "id" to hosyuIndex)
+                                        .parseSingle(object : RowParser<String> {
+                                            override fun parseRow(columns: Array<Any?>): String {
+                                                return columns[0] as String
+                                            }
+                                        }),
+                                    hosyuNum
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun makeMonsterList(db: SQLiteDatabase): MutableList<Monster> = mutableListOf<Monster>().apply {
+        with(questMonsterFragment) {
+            for (i in 0 until llMonster.childCount) {
+                val monsterView = llMonster.getChildAt(i)
+                val monsterIndex = monsterView.find<Spinner>(R.id.spnQuestMonster).selectedItemPosition
+                if (monsterIndex != 0) {
+                    val monsterNumStr = monsterView.find<EditText>(R.id.edtQuestMonsterNum).text.toString().trim()
+                    if (monsterNumStr.isNotEmpty()) {
+                        val monsterNum = monsterNumStr.toInt()
+                        if (monsterNum != 0) {
+                            add(
+                                Monster(
+                                    db.select(Constant.TABLE_QUEST_MONSTER, "game_id")
+                                        .whereArgs("(id = {id} + 1)", "id" to monsterIndex)
+                                        .parseSingle(object : RowParser<String> {
+                                            override fun parseRow(columns: Array<Any?>): String {
+                                                return columns[0] as String
+                                            }
+                                        }),
+                                    monsterView.find<Spinner>(R.id.spnQuestMonsterArea).selectedItemPosition,
+                                    monsterNum
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     private fun makeBossList(db: SQLiteDatabase): MutableList<Boss> = mutableListOf<Boss>().apply {
         with(questBossFragment) {
@@ -458,21 +386,19 @@ class QuestFragment : Fragment(), ViewPager.OnPageChangeListener,
                 val bossView = llBoss.getChildAt(i)
                 val bossIndex = bossView.find<Spinner>(R.id.spnQuestBoss).selectedItemPosition
                 if (bossIndex != 0) {
-                    val bossNumStr =
-                        bossView.find<EditText>(R.id.edtQuestBossNum).text.toString().trim()
+                    val bossNumStr = bossView.find<EditText>(R.id.edtQuestBossNum).text.toString().trim()
                     if (bossNumStr.isNotEmpty()) {
                         val bossNum = bossNumStr.toInt()
                         if (bossNum != 0) {
                             add(
                                 Boss(
-                                    db.select(Constant.TABLE_QUEST_BOSS, "game_id").whereArgs(
-                                        "(id = {id} + 1)",
-                                        "id" to bossIndex
-                                    ).parseSingle(object : RowParser<String> {
-                                        override fun parseRow(columns: Array<Any?>): String {
-                                            return columns[0] as String
-                                        }
-                                    }),
+                                    db.select(Constant.TABLE_QUEST_BOSS, "game_id")
+                                        .whereArgs("(id = {id} + 1)", "id" to bossIndex)
+                                        .parseSingle(object : RowParser<String> {
+                                            override fun parseRow(columns: Array<Any?>): String {
+                                                return columns[0] as String
+                                            }
+                                        }),
                                     bossView.find<Spinner>(R.id.spnQuestBossArea).selectedItemPosition,
                                     bossNum,
                                     bossView.find<EditText>(R.id.edtQuestBossSize).text.toString().trim().toInt(),

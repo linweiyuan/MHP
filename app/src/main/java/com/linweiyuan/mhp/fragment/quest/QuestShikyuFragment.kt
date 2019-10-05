@@ -28,11 +28,7 @@ class QuestShikyuFragment : Fragment() {
 
     private lateinit var ctx: Context
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         ctx = requireContext()
         val view = QuestShikyuFragmentUI().createView(AnkoContext.create(ctx, this))
         init()
@@ -57,11 +53,7 @@ class QuestShikyuFragment : Fragment() {
                 addShikyuView(view)
             }
         }
-        shikyuView.layoutParams =
-            ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
+        shikyuView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         shikyuView.find<Spinner>(R.id.spnQuestShikyu).adapter = questItemAdapter
         llShikyu.addView(shikyuView)
         reconfigureView()

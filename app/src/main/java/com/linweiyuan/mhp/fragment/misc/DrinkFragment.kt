@@ -33,11 +33,7 @@ class DrinkFragment : Fragment() {
 
     private lateinit var ctx: Context
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         ctx = requireContext()
         val view = DrinkFragmentUI().createView(AnkoContext.create(ctx, this))
         init()
@@ -81,9 +77,7 @@ class DrinkFragment : Fragment() {
                 (activity as MainActivity).onSuccess(data)
             }
 
-            override fun onFailure(data: Data) {
-
-            }
+            override fun onFailure(data: Data) {}
         }, ctx)
     }
 }

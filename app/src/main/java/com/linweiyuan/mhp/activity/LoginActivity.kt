@@ -104,9 +104,7 @@ class LoginActivity : AppCompatActivity(), TextWatcher {
                 login(username, password)
             }
 
-            override fun onFailure(data: Data) {
-
-            }
+            override fun onFailure(data: Data) {}
         }, this)
     }
 

@@ -58,11 +58,7 @@ class QuestBasicFragment : Fragment() {
 
     private lateinit var ctx: Context
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         ctx = requireContext()
         val view = QuestBasicFragmentUI().createView(AnkoContext.create(ctx, this))
         init()
@@ -92,12 +88,9 @@ class QuestBasicFragment : Fragment() {
                 questTypeAdapter = arrayAdapter(Constant.TABLE_QUEST_TYPE, ctx)
                 questRankAdapter = arrayAdapter(Constant.TABLE_QUEST_RANK, ctx)
                 questMapAdapter = arrayAdapter(Constant.TABLE_QUEST_MAP, ctx)
-                questJoinConditionAdapter =
-                    arrayAdapter(Constant.TABLE_QUEST_JOIN_CONDITION, ctx)
-                questSuccessConditionAdapter =
-                    arrayAdapter(Constant.TABLE_QUEST_SUCCESS_CONDITION, ctx)
-                questSuccessConditionTypeAdapter =
-                    arrayAdapter(Constant.TABLE_QUEST_SUCCESS_CONDITION_TYPE, ctx)
+                questJoinConditionAdapter = arrayAdapter(Constant.TABLE_QUEST_JOIN_CONDITION, ctx)
+                questSuccessConditionAdapter = arrayAdapter(Constant.TABLE_QUEST_SUCCESS_CONDITION, ctx)
+                questSuccessConditionTypeAdapter = arrayAdapter(Constant.TABLE_QUEST_SUCCESS_CONDITION_TYPE, ctx)
             }
 
             uiThread {

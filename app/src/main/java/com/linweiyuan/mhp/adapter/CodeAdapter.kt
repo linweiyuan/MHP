@@ -33,15 +33,11 @@ class CodeAdapter(private val ctx: Context, private val codeList: MutableList<Co
                 builder.setTitle(getString(R.string.code_operation))
                     .setMessage(getString(R.string.code_operation_hint))
                     .addAction(getString(R.string.code_show)) { dialog, _ ->
-                        contentDialog(
-                            getString(R.string.code_show_content),
-                            code.toString()
-                        ).show()
+                        contentDialog(getString(R.string.code_show_content), code.toString()).show()
                         dialog.dismiss()
                     }
                     .addAction(getString(R.string.code_share)) { dialog, _ ->
-                        val clipboard =
-                            getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                         @Suppress("DEPRECATION")
                         clipboard.text = code.toString()
                         toast(getString(R.string.code_copy_finish))
@@ -85,16 +81,14 @@ class CodeAdapter(private val ctx: Context, private val codeList: MutableList<Co
                     }).show()
             }
             holder.chkCodeEnable.onClick {
-                code.enable =
-                    if (holder.chkCodeEnable.isChecked) Constant.CODE_ENABLE else Constant.CODE_DISABLE
+                code.enable = if (holder.chkCodeEnable.isChecked) Constant.CODE_ENABLE else Constant.CODE_DISABLE
                 // 实时修改金手指代码
                 doAsync { writeCodeFile(codeList) }
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(CodeItemComponent().createView(AnkoContext.create(ctx)))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(CodeItemComponent().createView(AnkoContext.create(ctx)))
 
     override fun getItemCount() = codeList.size
 
