@@ -5,7 +5,7 @@ import com.linweiyuan.mhp.R
 import com.linweiyuan.mhp.fragment.misc.InfoFragment
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
 import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class InfoFragmentUI : AnkoComponent<InfoFragment> {
     override fun createView(ui: AnkoContext<InfoFragment>) = with(ui) {

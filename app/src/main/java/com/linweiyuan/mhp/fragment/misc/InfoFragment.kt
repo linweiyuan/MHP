@@ -22,7 +22,7 @@ import com.linweiyuan.mhp.ui.misc.InfoFragmentUI
 import com.linweiyuan.misc.model.Data
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
-import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.toast
 
 class InfoFragment : Fragment() {

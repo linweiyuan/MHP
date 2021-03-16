@@ -18,8 +18,8 @@ import com.linweiyuan.mhp.model.Code
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction
 import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.sdk25.coroutines.onLongClick
+import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.sdk27.coroutines.onLongClick
 
 class CodeAdapter(private val ctx: Context, private val codeList: MutableList<Code>) :
     RecyclerView.Adapter<CodeAdapter.ViewHolder>() {

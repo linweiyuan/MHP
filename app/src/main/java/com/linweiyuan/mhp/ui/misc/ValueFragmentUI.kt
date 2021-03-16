@@ -7,7 +7,7 @@ import com.linweiyuan.mhp.fragment.misc.ValueFragment
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner
 import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class ValueFragmentUI : AnkoComponent<ValueFragment> {
     override fun createView(ui: AnkoContext<ValueFragment>) = with(ui) {

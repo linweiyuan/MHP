@@ -6,7 +6,7 @@ import com.linweiyuan.mhp.fragment.misc.DrinkFragment
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner
 import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class DrinkFragmentUI : AnkoComponent<DrinkFragment> {
     override fun createView(ui: AnkoContext<DrinkFragment>) = with(ui) {

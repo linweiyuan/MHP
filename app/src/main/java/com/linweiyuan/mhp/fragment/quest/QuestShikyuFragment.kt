@@ -18,7 +18,7 @@ import com.linweiyuan.mhp.database.database
 import com.linweiyuan.mhp.ui.quest.QuestShikyuFragmentUI
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
-import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.toast
 
 class QuestShikyuFragment : Fragment() {
